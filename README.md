@@ -26,4 +26,4 @@ Lithuanian municipalities by total exported pets sum including all analysis peri
 To how many unique countries, each year pets are exported.
 Exported Pets sum, max entries and mean entries per year.
 Create logic to group data by counties (LT apskritys)
-Create time series forecating model for exported/lost pets
+Create time series forecating model for exported/lost pets# exported_lost_pets_from_lithuania
