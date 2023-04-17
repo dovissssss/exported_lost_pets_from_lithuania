@@ -18,12 +18,12 @@ project/
 Source: https://data.gov.lt/dataset/293/download/13457/Prarasti_isvezti_augintiniai%202023-04-01%2008.00.00.csv
 
 Questions:
-Exported Pets sum by years, type.
-Lost Pets sum by years, type.
-Exported/Lost Pets Total Sum throughout years.
-Total exported Pets by export countries.
-Lithuanian municipalities by total exported pets sum including all analysis period.
-To how many unique countries, each year pets are exported.
-Exported Pets sum, max entries and mean entries per year.
-Create logic to group data by counties (LT apskritys)
-Create time series forecating model for exported/lost pets# exported_lost_pets_from_lithuania
+* Exported Pets sum by years, type.
+* Lost Pets sum by years, type.
+* Exported/Lost Pets Total Sum throughout years.
+* Total exported Pets by export countries.
+* Lithuanian municipalities by total exported pets sum including all analysis period.
+* To how many unique countries, each year pets are exported.
+* Exported Pets sum, max entries and mean entries per year.
+* Create logic to group data by counties (LT apskritys)
+* Create time series forecating model for exported/lost pets
