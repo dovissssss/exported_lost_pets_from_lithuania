@@ -2,6 +2,8 @@ import pandas as pd
 
 DIRECTORY = "../data/raw/Prarasti_isvezti_augintiniai.csv"
 
+# prideti Pandera
+
 
 def read_dataset() -> pd.DataFrame:
     df = pd.read_csv(
