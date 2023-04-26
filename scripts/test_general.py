@@ -5,17 +5,17 @@ from general import count_exported_pets_sum_by_year, count_lost_pets_sum_by_year
 def test_count_exported_pets_sum_by_year():
     df = pd.DataFrame(
         {
-            "Išvežimo, praradimo pavadinimas": ["Išvežimas", "Išvežimas", "Išvežimas"],
-            " Išvežimo praradimo metai": ["2022", "2022", "2023"],
-            " Gyvūno augintinio rūšies pavadinimas": ["Šuo", "Šuo", "Katė"],
-            " Gyvūnų augintinių skaičius": [100, 150, 300],
+            "export_lost_types": ["Išvežimas", "Išvežimas", "Išvežimas"],
+            "year": ["2022", "2022", "2023"],
+            "pet_type": ["Šuo", "Šuo", "Katė"],
+            "pet_count": [100, 150, 300],
         }
     )
     df_expected = pd.DataFrame(
         {
-            " Išvežimo praradimo metai": ["2022", "2023"],
-            " Gyvūno augintinio rūšies pavadinimas": ["Šuo", "Katė"],
-            " Gyvūnų augintinių skaičius": [250, 300],
+            "year": ["2022", "2023"],
+            "pet_type": ["Šuo", "Katė"],
+            "pet_count": [250, 300],
         }
     )
     result = count_exported_pets_sum_by_year(df)
@@ -25,17 +25,17 @@ def test_count_exported_pets_sum_by_year():
 def test_count_lost_pets_sum_by_year():
     df = pd.DataFrame(
         {
-            "Išvežimo, praradimo pavadinimas": ["Dingimas", "Dingimas", "Išvežimas"],
-            " Išvežimo praradimo metai": ["2022", "2023", "2023"],
-            " Gyvūno augintinio rūšies pavadinimas": ["Šuo", "Katė", "Katė"],
-            " Gyvūnų augintinių skaičius": [10, 50, 3],
+            "export_lost_types": ["Dingimas", "Dingimas", "Išvežimas"],
+            "year": ["2022", "2023", "2023"],
+            "pet_type": ["Šuo", "Katė", "Katė"],
+            "pet_count": [10, 50, 3],
         }
     )
     df_expected = pd.DataFrame(
         {
-            " Išvežimo praradimo metai": ["2022", "2023"],
-            " Gyvūno augintinio rūšies pavadinimas": ["Šuo", "Katė"],
-            " Gyvūnų augintinių skaičius": [10, 50],
+            "year": ["2022", "2023"],
+            "pet_type": ["Šuo", "Katė"],
+            "pet_count": [10, 50],
         }
     )
     result = count_lost_pets_sum_by_year(df)
@@ -45,16 +45,16 @@ def test_count_lost_pets_sum_by_year():
 def test_count_total_exported_n_lost_pets_by_type():
     df = pd.DataFrame(
         {
-            "Išvežimo, praradimo pavadinimas": ["Išvežimas", "Dingimas", "Dingimas"],
-            " Gyvūno augintinio rūšies pavadinimas": ["Šuo", "Katė", "Katė"],
-            " Gyvūnų augintinių skaičius": [10, 50, 3],
+            "export_lost_types": ["Išvežimas", "Dingimas", "Dingimas"],
+            "pet_type": ["Šuo", "Katė", "Katė"],
+            "pet_count": [10, 50, 3],
         }
     )
     df_expected = pd.DataFrame(
         {
-            " Gyvūno augintinio rūšies pavadinimas": ["Katė", "Šuo"],
-            "Išvežimo, praradimo pavadinimas": ["Dingimas", "Išvežimas"],
-            " Gyvūnų augintinių skaičius": [53, 10],
+            "pet_type": ["Katė", "Šuo"],
+            "export_lost_types": ["Dingimas", "Išvežimas"],
+            "pet_count": [53, 10],
         }
     )
     result = count_total_exported_n_lost_pets_by_type(df)

@@ -9,59 +9,62 @@ def read_dataset() -> pd.DataFrame:
     df = pd.read_csv(
         DIRECTORY,
         delimiter=";",
-        dtype={" Išvežimo, praradimo pavadinimas": "string",
-               " Šalies pavadinimas": "string",
-               " Gyvūnų augintinio laikymo vietos savivaldybės pavadinimas": "string",
-               " Gyvūnų augintinio laikymo vietos seniūnijos pavadinimas": "string",
-               " Gyvūnų augintinio laikymo vietos vietovės pavadinimas": "string",
-               " Gyvūno augintinio rūšies pavadinimas": "string",
-               " Išvežimo praradimo metai": "int64",
-               " Gyvūnų augintinių skaičius": "int64"
+        skiprows=1,
+        names=["export_lost_types", "export_country", "municipality",
+               "ward", "area", "pet_type", "year", "pet_count"],
+        dtype={"export_lost_types": "string",
+               "export_country": "string",
+               "municipality": "string",
+               "ward": "string",
+               "area": "string",
+               "pet_type": "string",
+               "year": "int64",
+               "pet_count": "int64"
                })
     return df
 
 
-def count_exported_pets_sum_by_year(df) -> pd.DataFrame:
+def count_exported_pets_sum_by_year(df: pd.DataFrame) -> pd.DataFrame:
     """Function Returns From Lithuania Exported Pets Number by Type and Year"""
-    exported_pets_by_year = df[df["Išvežimo, praradimo pavadinimas"] == "Išvežimas"].groupby(
-        [" Išvežimo praradimo metai", " Gyvūno augintinio rūšies pavadinimas"], as_index=False)[" Gyvūnų augintinių skaičius"].sum()
-    return exported_pets_by_year
+    exported_pets_by_year = df[df["export_lost_types"] == "Išvežimas"].groupby(
+        ["year", "pet_type"], as_index=False)["pet_count"].sum()
+    return exported_pets_by_year  # type: ignore
 
 
-def count_lost_pets_sum_by_year(df) -> pd.DataFrame:
+def count_lost_pets_sum_by_year(df: pd.DataFrame) -> pd.DataFrame:
     """Function Returns Lost Pets Number In Lithuania by Type and Year"""
-    lost_pets_by_year = df[df["Išvežimo, praradimo pavadinimas"] == "Dingimas"].groupby(
-        [" Išvežimo praradimo metai", " Gyvūno augintinio rūšies pavadinimas"], as_index=False)[" Gyvūnų augintinių skaičius"].sum()
-    return lost_pets_by_year
+    lost_pets_by_year = df[df["export_lost_types"] == "Dingimas"].groupby(
+        ["year", "pet_type"], as_index=False)["pet_count"].sum()
+    return lost_pets_by_year  # type: ignore
 
 
-def count_total_exported_n_lost_pets_by_type(df) -> pd.DataFrame:
+def count_total_exported_n_lost_pets_by_type(df: pd.DataFrame) -> pd.DataFrame:
     lost_n_exported_pets = df.groupby(
-        [" Gyvūno augintinio rūšies pavadinimas", "Išvežimo, praradimo pavadinimas"], as_index=False)[" Gyvūnų augintinių skaičius"].sum()
-    return lost_n_exported_pets
+        ["pet_type", "export_lost_types"], as_index=False)["pet_count"].sum()
+    return lost_n_exported_pets  # type: ignore
 
 
-def count_exported_pets_by_export_countries(df) -> pd.DataFrame:
-    exported_pets_by_countries = df[df["Išvežimo, praradimo pavadinimas"] == "Išvežimas"].groupby(
-        " Šalies pavadinimas", as_index=False)[" Gyvūnų augintinių skaičius"].sum().sort_values(' Gyvūnų augintinių skaičius', ascending=False)
+def count_exported_pets_by_export_countries(df: pd.DataFrame) -> pd.DataFrame:
+    exported_pets_by_countries = df[df["export_lost_types"] == "Išvežimas"].groupby(
+        "export_country", as_index=False)["pet_count"].sum().sort_values('pet_count', ascending=False)  # type: ignore
     return exported_pets_by_countries
 
 
-def count_exported_pets_by_lt_municipalities(df) -> pd.DataFrame:
-    exported_pets_by_lt_municipalities = df[df["Išvežimo, praradimo pavadinimas"] == "Išvežimas"].groupby(
-        " Gyvūnų augintinio laikymo vietos savivaldybės pavadinimas", as_index=False)[" Gyvūnų augintinių skaičius"].sum().sort_values(' Gyvūnų augintinių skaičius', ascending=False)
+def count_exported_pets_by_lt_municipalities(df: pd.DataFrame) -> pd.DataFrame:
+    exported_pets_by_lt_municipalities = df[df["export_lost_types"] == "Išvežimas"].groupby(
+        "municipality", as_index=False)["pet_count"].sum().sort_values('pet_count', ascending=False)  # type: ignore
     return exported_pets_by_lt_municipalities
 
 
-def get_to_how_many_unique_countries_pets_r_exported(df) -> pd.DataFrame:
-    export_countries_count = df[df["Išvežimo, praradimo pavadinimas"] == "Išvežimas"].groupby(
-        " Išvežimo praradimo metai", as_index=False)[" Šalies pavadinimas"].nunique()
-    return export_countries_count
+def get_to_how_many_unique_countries_pets_r_exported(df: pd.DataFrame) -> pd.DataFrame:
+    export_countries_count = df[df["export_lost_types"] == "Išvežimas"].groupby(
+        "year", as_index=False)["export_country"].nunique()
+    return export_countries_count  # type: ignore
 
 
-def get_exported_pets_sum_n_max_entries_by_year(df) -> pd.DataFrame:
-    exported_pets_sum_n_max_entries = df[df["Išvežimo, praradimo pavadinimas"] == "Išvežimas"].groupby(
-        " Išvežimo praradimo metai", as_index=False)[" Gyvūnų augintinių skaičius"].agg(['sum', 'max', 'mean'])
+def get_exported_pets_sum_n_max_entries_by_year(df: pd.DataFrame) -> pd.DataFrame:
+    exported_pets_sum_n_max_entries = df[df["export_lost_types"] == "Išvežimas"].groupby(
+        "year", as_index=False)["pet_count"].agg(['sum', 'max', 'mean'])
     return exported_pets_sum_n_max_entries
 
 
