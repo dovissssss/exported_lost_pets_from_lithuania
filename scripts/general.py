@@ -1,11 +1,10 @@
 import pandas as pd
-
-DIRECTORY = "../data/raw/Prarasti_isvezti_augintiniai.csv"
+import config
 
 
 def read_dataset() -> pd.DataFrame:
     df = pd.read_csv(
-        DIRECTORY,
+        config.EXPORTED_PETS_DATA,
         delimiter=";",
         skiprows=1,
         names=[
@@ -107,11 +106,10 @@ def get_exported_pets_sum_n_max_entries_by_year(df: pd.DataFrame) -> pd.DataFram
     return exported_pets_sum_n_max_entries
 
 
-EXTERNAL_DATASET_DIRECTORY = "../data/raw/data-table.xlsx"
-
-
 def read_external_dataset() -> pd.DataFrame:
-    df_external = pd.read_excel(EXTERNAL_DATASET_DIRECTORY, index_col=0, skiprows=4)
+    df_external = pd.read_excel(
+        config.MUNICIPALITIES_POPULATION_DATA, index_col=0, skiprows=4
+    )
     df_external.index.name = "year"
     return df_external
 
