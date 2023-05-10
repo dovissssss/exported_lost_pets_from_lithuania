@@ -4,7 +4,7 @@ from pandera.typing import DataFrame, Series
 import config
 
 
-def read_dataset() -> pd.DataFrame:
+def read_exported_pets_dataset() -> pd.DataFrame:
     df = pd.read_csv(
         config.EXPORTED_PETS_DATA,
         delimiter=";",
@@ -124,7 +124,7 @@ def get_exported_pets_sum_n_max_entries_by_year(df: pd.DataFrame) -> pd.DataFram
     return exported_pets_sum_n_max_entries
 
 
-def read_external_dataset() -> pd.DataFrame:
+def read_municipalities_population_dataset() -> pd.DataFrame:
     df_external = pd.read_excel(
         config.MUNICIPALITIES_POPULATION_DATA, index_col=0, skiprows=4
     )
@@ -132,16 +132,20 @@ def read_external_dataset() -> pd.DataFrame:
     return df_external
 
 
-def unpivot_external_dataset(df_external: pd.DataFrame) -> pd.DataFrame:
+def unpivot_municipalities_population_dataset(
+    df_external: pd.DataFrame,
+) -> pd.DataFrame:
     df_external_unpivoted = df_external.melt(
         ignore_index=False, var_name="municipality", value_name="population"
     )
     return df_external_unpivoted
 
 
-def merge_with_external_dataset() -> pd.DataFrame:
+def merge_with_municipalities_population_dataset() -> pd.DataFrame:
     df_merged = count_exported_pets_by_year_n_lt_municipalities.merge(
-        unpivot_external_dataset, how="left", on=["year", "municipality"]
+        unpivot_municipalities_population_dataset,
+        how="left",
+        on=["year", "municipality"],
     )
     df_merged["pets_per_population"] = df_merged["pet_count"] / df_merged["population"]
     return df_merged
