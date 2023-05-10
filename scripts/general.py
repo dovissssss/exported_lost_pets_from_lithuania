@@ -1,4 +1,6 @@
 import pandas as pd
+import pandera as pa
+from pandera.typing import DataFrame, Series
 import config
 
 
@@ -28,6 +30,22 @@ def read_dataset() -> pd.DataFrame:
             "pet_count": "int64",
         },
     )
+    return df
+
+
+class InputSchema(pa.SchemaModel):
+    export_lost_types: Series[str]
+    export_country: Series[str] = pa.Field(nullable=True)
+    municipality: Series[str]
+    ward: Series[str] = pa.Field(nullable=True)
+    area: Series[str]
+    pet_type: Series[str]
+    year: Series[int]
+    pet_count: Series[int]
+
+
+@pa.check_types
+def transform(df: DataFrame[InputSchema]):
     return df
 
 
