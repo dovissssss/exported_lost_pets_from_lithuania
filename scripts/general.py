@@ -130,6 +130,12 @@ def unpivot_municipalities_population_dataset(
     return df_external_unpivoted
 
 
+class InputSchema2(pa.SchemaModel):
+    year: Series[str]
+    municipality: Series[str]
+    population: Series[str]
+
+
 def merge_with_municipalities_population_dataset() -> pd.DataFrame:
     logging.info(
         "Started the merge between exported pets dataset and municipalities population dataset..."
