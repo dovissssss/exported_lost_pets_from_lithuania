@@ -145,7 +145,9 @@ def merge_with_municipalities_population_dataset() -> pd.DataFrame:
         how="left",
         on=["year", "municipality"],
     )
-    df_merged["pets_per_population"] = df_merged["pet_count"] / df_merged["population"]
+    df_merged = df_merged.assign(
+        pets_per_population=df_merged["pet_count"] / df_merged["population"]
+    )
     return df_merged
 
 
