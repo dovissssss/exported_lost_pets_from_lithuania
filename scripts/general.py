@@ -2,7 +2,7 @@ import pandas as pd
 import pandera as pa
 import logging
 from pandera.typing import DataFrame
-from data_schemas import municipalities_population
+from data_schemas import MunicipalitiesPopulation
 
 
 def count_exported_pets_sum_by_year(df: pd.DataFrame) -> pd.DataFrame:
@@ -117,7 +117,7 @@ def unpivot_municipalities_population_dataset(
 
 @pa.check_types()
 def merge_with_municipalities_population_dataset() -> (
-    DataFrame[municipalities_population]
+    DataFrame[MunicipalitiesPopulation]
 ):
     logging.info(
         "Started the merge between exported pets dataset and municipalities population dataset..."
