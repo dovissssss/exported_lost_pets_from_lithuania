@@ -1,23 +1,5 @@
 import pandas as pd
-import pandera as pa
-from pandera.typing import DataFrame, Series
 import logging
-
-
-class InputSchema(pa.SchemaModel):
-    export_lost_types: Series[str]
-    export_country: Series[str] = pa.Field(nullable=True)
-    municipality: Series[str]
-    ward: Series[str] = pa.Field(nullable=True)
-    area: Series[str]
-    pet_type: Series[str]
-    year: Series[int]
-    pet_count: Series[int]
-
-
-@pa.check_types
-def transform(df: DataFrame[InputSchema]):
-    return df
 
 
 def count_exported_pets_sum_by_year(df: pd.DataFrame) -> pd.DataFrame:
@@ -128,12 +110,6 @@ def unpivot_municipalities_population_dataset(
         ignore_index=False, var_name="municipality", value_name="population"
     )
     return df_external_unpivoted
-
-
-class InputSchema2(pa.SchemaModel):
-    year: Series[str]
-    municipality: Series[str]
-    population: Series[str]
 
 
 def merge_with_municipalities_population_dataset() -> pd.DataFrame:
