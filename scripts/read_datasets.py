@@ -1,9 +1,11 @@
 import pandas as pd
+import pandera as pa
 import config
 from pandera.typing import DataFrame
 from data_schemas import exported_lost_pets
 
 
+@pa.check_types()
 def read_exported_pets_dataset() -> DataFrame[exported_lost_pets]:
     df = pd.read_csv(
         config.EXPORTED_PETS_DATA,
