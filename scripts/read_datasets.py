@@ -1,8 +1,10 @@
 import pandas as pd
 import config
+from pandera.typing import DataFrame
+from data_schemas import exported_lost_pets
 
 
-def read_exported_pets_dataset() -> pd.DataFrame:
+def read_exported_pets_dataset() -> DataFrame[exported_lost_pets]:
     df = pd.read_csv(
         config.EXPORTED_PETS_DATA,
         delimiter=";",
@@ -17,18 +19,8 @@ def read_exported_pets_dataset() -> pd.DataFrame:
             "year",
             "pet_count",
         ],
-        dtype={
-            "export_lost_types": "string",
-            "export_country": "string",
-            "municipality": "string",
-            "ward": "string",
-            "area": "string",
-            "pet_type": "string",
-            "year": "int64",
-            "pet_count": "int64",
-        },
     )
-    return df
+    return df  # type: ignore
 
 
 def read_municipalities_population_dataset() -> pd.DataFrame:
