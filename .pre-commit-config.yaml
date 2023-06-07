@@ -14,3 +14,11 @@ repos:
     hooks:
     -   id: flake8
         args: [--max-line-length=120]
+- repo: https://github.com/nbQA-dev/nbQA
+  rev: 1.7.0
+  hooks:
+    - id: nbqa-black
+    - id: nbqa-pyupgrade
+      args: ["--py37-plus"]
+    - id: nbqa-isort
+      args: ["--float-to-top"]
