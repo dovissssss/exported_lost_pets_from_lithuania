@@ -32,7 +32,7 @@ def plot_exported_pets_by_year_n_type(dfr):
     )
 
 
-plt.show()
+plt.savefig("exported_pets_by_year_n_type.png")
 
 
 def group_exported_pets_by_year(df):
@@ -56,7 +56,7 @@ def plot_exported_pets_by_year(exported_pets_by_year):
         title="Exported Pets From Lithuania",
     )
 
-    plt.show()
+    plt.savefig("exported_pets_by_year.png")
 
 
 def count_unique_countries_by_year(df):
@@ -74,4 +74,4 @@ def plot_unique_countries_count_by_year(unique_countries):
     # Plot count of unique countries by year
     unique_countries.plot.bar(legend=False, figsize=(5, 3))
 
-    plt.show()
+    plt.savefig("unique_countries_count_by_year.png")
