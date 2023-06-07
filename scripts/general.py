@@ -5,6 +5,19 @@ from pandera.typing import DataFrame
 from data_schemas import MunicipalitiesPopulation
 
 
+def group_exported_pets_by_year(df: pd.DataFrame) -> pd.DataFrame:
+    # Group Lost Pets sum by year
+    logging.info("Started the count for exported pets from Lithuania by year...")
+    pets_by_year = (
+        df[df["export_lost_types"] == "Išvežimas"]
+        .groupby("year", as_index=False)["pet_count"]
+        .agg(["sum"])
+    )
+
+    logging.info(f"Exported Pets from Lithuania by Year: {pets_by_year}")
+    return pets_by_year
+
+
 def count_exported_pets_sum_by_year(df: pd.DataFrame) -> pd.DataFrame:
     """Function Returns From Lithuania Exported Pets Number by Type and Year"""
     logging.info("Started the count for exported pets from Lithuania by year...")
