@@ -5,3 +5,4 @@ openpyxl
 pandera
 logging
 pre-commit
+nbqa
