@@ -1,8 +1,17 @@
 import pandas as pd
 import pandera as pa
 import logging
+import requests
+import config
 from pandera.typing import DataFrame
 from data_schemas import MunicipalitiesPopulation
+
+
+def download_data_files():
+    for url, destination in zip(config.data_file_urls, config.data_files_destinations):
+        response = requests.get(url, allow_redirects=True)
+        with open(destination, "wb") as file:
+            file.write(response.content)
 
 
 def group_exported_pets_by_year(df: pd.DataFrame) -> pd.DataFrame:
@@ -146,7 +155,8 @@ def merge_with_municipalities_population_dataset() -> (
     return df_merged
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    download_data_files()
 #     df = read_dataset()
 #     df = count_exported_pets_sum_by_year(df)
 #     df = count_lost_pets_sum_by_year(df)
