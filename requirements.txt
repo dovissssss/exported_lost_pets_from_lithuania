@@ -6,3 +6,4 @@ pandera
 logging
 pre-commit
 nbqa
+requests

@@ -19,6 +19,18 @@ Source: https://data.gov.lt/dataset/293/download/13457/Prarasti_isvezti_augintin
 
 External Data Source:https://osp.stat.gov.lt/lt/statistiniu-rodikliu-analize?hash=a1f6bbd8-ce7e-4980-ba01-72567b3983d8
 
+## Installation
+
+First of all please install all required modules with:
+```
+pip install -r requirements.txt
+```
+
+with download_data_files function download the required data files for analysis:
+```
+python general.py --download_data_files
+```
+
 Questions:
 * Exported Pets sum by years, type.
 * Lost Pets sum by years, type.
