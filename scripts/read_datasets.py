@@ -1,12 +1,20 @@
 import pandas as pd
 import pandera as pa
+import requests
 import config
 from pandera.typing import DataFrame
 from data_schemas import ExportedLostPets
 
 
+def download_data_files():
+    for url, destination in zip(config.DATA_FILE_URLS, config.DATA_FILES_DESTINATIONS):
+        response = requests.get(url, allow_redirects=True)
+        with open(destination, "wb") as file:
+            file.write(response.content)
+
+
 @pa.check_types()
-def read_exported_pets_dataset() -> DataFrame[ExportedLostPets]:
+def read_exported_pets_dataset(df) -> DataFrame[ExportedLostPets]:
     df = pd.read_csv(
         config.EXPORTED_PETS_DATA,
         delimiter=";",

@@ -1,10 +1,10 @@
 import seaborn as sb
 import matplotlib.pyplot as plt
 from read_datasets import read_exported_pets_dataset
-from general import (
+from analysis_exported_pets import (
     count_exported_pets_sum_by_year,
     group_exported_pets_by_year,
-    get_to_how_many_unique_countries_pets_r_exported,
+    count_to_how_many_unique_countries_pets_r_exported,
 )
 import config
 
@@ -45,7 +45,7 @@ def plot_exported_pets_by_year(pets_by_year):
     plt.savefig("exported_pets_by_year.png")
 
 
-unique_coutries_by_year = get_to_how_many_unique_countries_pets_r_exported(df)
+unique_coutries_by_year = count_to_how_many_unique_countries_pets_r_exported(df)
 
 
 def plot_unique_countries_count_by_year(unique_coutries_by_year):
