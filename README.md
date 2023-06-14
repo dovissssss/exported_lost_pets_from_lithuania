@@ -26,9 +26,14 @@ First of all please install all required modules with:
 pip install -r requirements.txt
 ```
 
-with download_data_files function download the required data files for analysis:
+with download_data function download the required data files for analysis:
 ```
-python general.py --download_data_files
+python run.py --download_data
+```
+
+using visualize_all_charts function draw charts for the analysis:
+```
+python run.py ----visualize_all_charts
 ```
 
 Questions:
