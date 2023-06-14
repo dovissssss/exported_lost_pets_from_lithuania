@@ -1,5 +1,5 @@
 import pandas as pd
-from general import (
+from analysis_exported_pets import (
     count_exported_pets_sum_by_year,
     count_lost_pets_sum_by_year,
     count_total_exported_n_lost_pets_by_type,
