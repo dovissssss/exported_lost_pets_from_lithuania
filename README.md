@@ -28,12 +28,12 @@ pip install -r requirements.txt
 
 with download_data function download the required data files for analysis:
 ```
-python run.py --download_data
+python scripts/run.py --download_data
 ```
 
 using visualize_all_charts function draw charts for the analysis:
 ```
-python run.py ----visualize_all_charts
+python scripts/run.py ----visualize_all_charts
 ```
 
 Questions:
